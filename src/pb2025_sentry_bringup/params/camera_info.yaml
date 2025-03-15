@@ -1,0 +1,26 @@
+image_width: 1440
+image_height: 1080
+camera_name: front_industrial_camera
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [1802.660547, 0.000000, 724.336357,
+        0.000000, 1805.170912, 554.682044,
+        0.000000, 0.000000, 1.000000]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.082454, 0.108549, -0.000202, -0.000127, 0.000000]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1.000000, 0.000000, 0.000000,
+        0.000000, 1.000000, 0.000000,
+        0.000000, 0.000000, 1.000000]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [1782.400391, 0.000000, 723.788187, 0.000000,
+        0.000000, 1791.625488, 554.238035, 0.000000,
+        0.000000, 0.000000, 1.000000, 0.000000]
