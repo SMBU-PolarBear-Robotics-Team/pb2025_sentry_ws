@@ -38,7 +38,7 @@ def generate_launch_description():
             "--compression-format",
             "zstd",
             "-d",
-            "30",
+            "15",
         ],
         output="screen",
     )

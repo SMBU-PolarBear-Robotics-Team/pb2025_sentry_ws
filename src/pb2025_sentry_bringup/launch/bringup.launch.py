@@ -72,7 +72,7 @@ def generate_launch_description():
 
     declare_detector_cmd = DeclareLaunchArgument(
         "detector",
-        default_value="opencv",
+        default_value="openvino",
         description="Type of detector to use (option: 'opencv', 'openvino')",
     )
 
@@ -289,8 +289,8 @@ def generate_launch_description():
     ld.add_action(start_rviz_cmd)
     ld.add_action(start_serial_driver_cmd)
     ld.add_action(start_vision_launch_cmd)
-    ld.add_action(start_navigation_launch_cmd)
-    ld.add_action(start_behavior_launch_cmd)
+    # ld.add_action(start_navigation_launch_cmd)
+    # ld.add_action(start_behavior_launch_cmd)
     ld.add_action(record_rosbag_cmd)
 
     return ld
