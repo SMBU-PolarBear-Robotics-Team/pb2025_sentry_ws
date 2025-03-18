@@ -5,6 +5,7 @@ standard_robot_pp_ros2:
     flow_control: none
     parity: none
     stop_bits: "1"
+    record_rosbag: false
     debug: false
 
 joint_state_publisher:

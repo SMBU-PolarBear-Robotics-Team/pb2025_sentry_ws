@@ -55,7 +55,6 @@ def generate_launch_description():
     params_file = LaunchConfiguration("params_file")
     rviz_config_file = LaunchConfiguration("rviz_config_file")
     use_robot_state_pub = LaunchConfiguration("use_robot_state_pub")
-    record_rosbag = LaunchConfiguration("record_rosbag")
     use_rviz = LaunchConfiguration("use_rviz")
     use_composition = LaunchConfiguration("use_composition")
     use_respawn = LaunchConfiguration("use_respawn")
@@ -159,10 +158,6 @@ def generate_launch_description():
         "use_rviz", default_value="False", description="Whether to start RViz"
     )
 
-    declare_record_rosbag_cmd = DeclareLaunchArgument(
-        "record_rosbag", default_value="False", description="Whether to record rosbag"
-    )
-
     declare_use_composition_cmd = DeclareLaunchArgument(
         "use_composition",
         default_value="True",
@@ -260,7 +255,6 @@ def generate_launch_description():
     )
 
     record_rosbag_cmd = Node(
-        condition=IfCondition(record_rosbag),
         package="rosbag2_composable_recorder",
         executable="composable_recorder_node",
         name="rosbag_recorder",
@@ -291,7 +285,6 @@ def generate_launch_description():
     ld.add_action(declare_params_file_cmd)
     ld.add_action(declare_rviz_config_file_cmd)
     ld.add_action(declare_use_robot_state_pub_cmd)
-    ld.add_action(declare_record_rosbag_cmd)
     ld.add_action(declare_use_rviz_cmd)
     ld.add_action(declare_use_composition_cmd)
     ld.add_action(declare_use_respawn_cmd)

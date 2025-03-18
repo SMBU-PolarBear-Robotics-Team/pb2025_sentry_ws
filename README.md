@@ -48,6 +48,9 @@ vcs import --recursive . < dependencies.repos
 > [!NOTE]
 > `dependencies.repos` 文件已包含所有模块所依赖的仓库地址，无需手动查阅子模块的 README 手动克隆依赖。
 
+> [!TIP]
+> 使用命令 `vcs pull ./src` 可更新所有子模块。
+
 ### 2.3 Build
 
 ```bash
@@ -143,17 +146,11 @@ ros2 run nav2_map_server map_saver_cli -f <YOUR_WORLD_NAME>
 > [!NOTE]
 > 本命令仅录制了传感器数据，没有直接录制 tf 信息，因此启动导航/视觉模块时，应设置 `use_robot_state_pub:=True`，以使用 joint_state 数据生成并发布整车 TF。
 
-```bash
-source install/setup.zsh
+方法一：根据裁判系统数据自动触发录包
 
-ros2 bag record -o sentry_$(date +%Y%m%d_%H%M%S) \
-/serial/gimbal_joint_state \
-/livox/imu \
-/livox/lidar \
-/front_industrial_camera/image \
-/front_industrial_camera/camera_info \
---compression-mode file --compression-format zstd -d 30
-```
+设置 [node_params.yaml](./src/pb2025_sentry_bringup/params/node_params.yaml) 中的 `standard_robot_pp_ros2.record_rosbag` 参数为 `True`，设置 `rosbag_recorder.topics` 为要录制的话题，裁判系统进入 5s 倒计时阶段时自动开启录制，进入比赛结算阶段时自动结束录制并保存。
+
+方法二：命令行手动触发录包
 
 #### 3.3.2 Play
 
