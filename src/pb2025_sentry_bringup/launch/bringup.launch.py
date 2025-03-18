@@ -124,12 +124,6 @@ def generate_launch_description():
         description="Use simulation (Gazebo) clock if true",
     )
 
-    declare_detector_cmd = DeclareLaunchArgument(
-        "detector",
-        default_value="opencv",
-        description="Type of detector to use (option: 'opencv', 'openvino', 'tensorrt')",
-    )
-
     declare_params_file_cmd = DeclareLaunchArgument(
         "params_file",
         default_value=os.path.join(bringup_dir, "params", "node_params.yaml"),
