@@ -2,44 +2,55 @@ repositories:
   src/tools/teleop_gimbal_keyboard:
     type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/teleop_gimbal_keyboard.git
+    version: main
 
   src/tools/pcd2pgm:
     type: git
     url: https://github.com/LihanChen2004/pcd2pgm.git
+    version: master
 
   src/tools/publish_anything_ros2_gui:
     type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/publish_anything_ros2_gui.git
+    version: main
 
   src/tools/rosbag2_composable_recorder:
     type: git
     url: https://github.com/berndpfrommer/rosbag2_composable_recorder.git
+    version: c0c9b225dfca54334ac4ca453e307bb017c8a322
 
   src/dependencies/sdformat_tools:
+    type: git
     url: https://github.com/gezp/sdformat_tools.git
     version: galactic
 
   src/dependencies/joint_state_publisher:
+    type: git
     url: https://github.com/LihanChen2004/joint_state_publisher.git
     version: feat-offset-timestamp
 
   src/dependencies/hik_camera_ros2_driver:
     type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/hik_camera_ros2_driver.git
+    version: main
 
   src/dependencies/rmoss_core:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/rmoss_core.git
     version: humble
 
   src/dependencies/rmoss_gazebo:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/rmoss_gazebo.git
     version: humble
 
   src/dependencies/rmoss_gz_resources:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/rmoss_gz_resources.git
     version: humble
 
   src/dependencies/rmoss_interfaces:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/rmoss_interfaces.git
     version: humble
 
@@ -49,38 +60,46 @@ repositories:
     version: humble
 
   src/interfaces/auto_aim_interfaces:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/auto_aim_interfaces.git
     version: main
 
   src/interfaces/pb_rm_interfaces:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/pb_rm_interfaces.git
     version: main
 
   src/rmu_gazebo_simulator:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/rmu_gazebo_simulator.git
     version: main
-    path: rmu_gazebo_simulator
 
   src/standard_robot_pp_ros2:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/standard_robot_pp_ros2.git
     version: main
 
   src/pb2025_robot_description:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/pb2025_robot_description.git
     version: main
 
   src/pb2025_sentry_nav:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/pb2025_sentry_nav.git
     version: main
 
   src/pb2025_rm_vision:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/pb2025_rm_vision.git
     version: main
 
   src/pb2025_rm_vision/armor_detector_openvino:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/armor_detector_openvino.git
     version: main
 
   src/pb2025_sentry_behavior:
+    type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/pb2025_sentry_behavior.git
     version: main
