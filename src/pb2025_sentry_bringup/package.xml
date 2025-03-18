@@ -4,15 +4,16 @@
   <name>pb2025_sentry_bringup</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="lihanchen2004@163.com">chenjun</maintainer>
+  <maintainer email="lihanchen2004@163.com">Lihan Chen</maintainer>
   <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>pb2025_rm_vision</depend>
-
-  <exec_depend>pb2025_vision_bringup</exec_depend>
+  <exec_depend>nav2_common</exec_depend>
   <exec_depend>standard_robot_pp_ros2</exec_depend>
+  <exec_depend>pb2025_vision_bringup</exec_depend>
+  <exec_depend>pb2025_nav_bringup</exec_depend>
+  <exec_depend>pb2025_sentry_behavior</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

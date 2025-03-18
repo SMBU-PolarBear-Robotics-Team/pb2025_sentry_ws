@@ -11,6 +11,10 @@ repositories:
     type: git
     url: https://github.com/SMBU-PolarBear-Robotics-Team/publish_anything_ros2_gui.git
 
+  src/tools/rosbag2_composable_recorder:
+    type: git
+    url: https://github.com/berndpfrommer/rosbag2_composable_recorder.git
+
   src/dependencies/sdformat_tools:
     url: https://github.com/gezp/sdformat_tools.git
     version: galactic

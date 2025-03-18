@@ -730,3 +730,20 @@ pb_teleop_twist_joy_node:
       roll: 0.0
       pitch: -1.5
       yaw: 3.5
+
+
+rosbag_recorder:
+  ros__parameters:
+    bag_prefix: "rosbag_sentry_"
+    topics: [
+      "/serial/gimbal_joint_state",
+      "/front_industrial_camera/image",
+      "/front_industrial_camera/camera_info",
+      "/livox/imu",
+      "/livox/lidar",
+    ]
+    storage_id: "sqlite3"
+    record_all: False
+    disable_discovery: False
+    start_recording_immediately: False
+    max_bagfile_duration: 15
