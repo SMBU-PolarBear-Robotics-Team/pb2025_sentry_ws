@@ -68,7 +68,7 @@ armor_detector_openvino:
 armor_tracker:
   ros__parameters:
     use_sim_time: false
-    target_frame: chassis
+    target_frame: gimbal_pitch_odom
     max_armor_distance: 10.0
 
     ekf:
