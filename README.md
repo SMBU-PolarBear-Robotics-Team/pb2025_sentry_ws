@@ -152,6 +152,18 @@ ros2 run nav2_map_server map_saver_cli -f <YOUR_WORLD_NAME>
 
 方法二：命令行手动触发录包
 
+```bash
+source install/setup.zsh
+
+ros2 bag record -o sentry_$(date +%Y%m%d_%H%M%S) \
+/serial/gimbal_joint_state \
+/livox/imu \
+/livox/lidar \
+/front_industrial_camera/image \
+/front_industrial_camera/camera_info \
+--compression-mode file --compression-format zstd -d 30
+```
+
 #### 3.3.2 Play
 
 > [!NOTE]
