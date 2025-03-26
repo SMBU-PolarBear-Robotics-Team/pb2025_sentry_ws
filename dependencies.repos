@@ -9,11 +9,6 @@ repositories:
     url: https://github.com/LihanChen2004/pcd2pgm.git
     version: master
 
-  src/tools/publish_anything_ros2_gui:
-    type: git
-    url: https://github.com/SMBU-PolarBear-Robotics-Team/publish_anything_ros2_gui.git
-    version: main
-
   src/tools/rosbag2_composable_recorder:
     type: git
     url: https://github.com/berndpfrommer/rosbag2_composable_recorder.git
