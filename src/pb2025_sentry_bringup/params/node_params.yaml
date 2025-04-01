@@ -5,7 +5,7 @@ standard_robot_pp_ros2:
     flow_control: none
     parity: none
     stop_bits: "1"
-    record_rosbag: false
+    record_rosbag: true
     debug: false
 
 joint_state_publisher:
@@ -32,7 +32,7 @@ hik_camera_ros2_driver:
     # camera_topic: "image"         # If not set, it will be set as <camera_name>/image
 
     acquisition_frame_rate: 165.0   # Unit: Hz
-    exposure_time: 1500             # Unit: us
+    exposure_time: 5000             # Unit: us
     gain: 12.0                      # Range: 0.0 ~ 16.9, Unit: dB
 
 armor_detector_opencv:
@@ -93,7 +93,7 @@ projectile_motion:
       offset_pitch: 0.0
       offset_yaw: 0.0
       offset_time: 0.1
-      initial_speed: 20.0
+      initial_speed: 21.5
       target_frame: "gimbal_pitch"              # gimbal frame_id
       target_topic: "tracker/target"
       gimbal_cmd_topic: "cmd_gimbal"
@@ -167,8 +167,8 @@ point_lio:
       plane_thr: 0.1                                    # 0.05, the threshold for plane criteria, the smaller, the flatter a plane
       match_s: 81.0
       ivox_grid_resolution: 0.5
-      gravity: [0.0, 0.0, -9.8]                         # gravity to be aligned
-      gravity_init: [0.0, 0.0, -9.8]                    # preknown gravity in the first IMU body frame, use when imu_en is False or start from a non-stationary state
+      gravity: [0.004820301663130522, 0.5298149585723877, -0.8476489186286926]                         # gravity to be aligned
+      gravity_init: [0.004820301663130522, 0.5298149585723877, -0.8476489186286926]                     # preknown gravity in the first IMU body frame, use when imu_en is False or start from a non-stationary state
       extrinsic_T: [ -0.011, -0.02329, 0.04412 ]
       extrinsic_R: [ 1.0, 0.0, 0.0,
                      0.0, 1.0, 0.0,
@@ -243,7 +243,7 @@ fake_vel_transform:
     input_cmd_vel_topic: "cmd_vel_nav2_result"
     output_cmd_vel_topic: "cmd_vel"
     cmd_spin_topic: "cmd_spin"
-    init_spin_speed: 3.14
+    init_spin_speed: 0.0
 
 small_gicp_relocalization:
   ros__parameters:
@@ -705,7 +705,7 @@ pb2025_sentry_behavior_server:
 
 pb2025_sentry_behavior_client:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: false
     target_tree: rmul_2025
 
 pb_teleop_twist_joy_node:
