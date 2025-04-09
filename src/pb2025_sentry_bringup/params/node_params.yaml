@@ -168,8 +168,8 @@ point_lio:
       plane_thr: 0.1                                    # 0.05, the threshold for plane criteria, the smaller, the flatter a plane
       match_s: 81.0
       ivox_grid_resolution: 0.5
-      gravity: [0.004820301663130522, 0.5298149585723877, -0.8476489186286926]                         # gravity to be aligned
-      gravity_init: [0.004820301663130522, 0.5298149585723877, -0.8476489186286926]                     # preknown gravity in the first IMU body frame, use when imu_en is False or start from a non-stationary state
+      gravity: [-0.0, 0.5305473804473877, -0.8383715748786926]                         # gravity to be aligned
+      gravity_init: [-0.0, 0.5305473804473877, -0.8383715748786926]                     # preknown gravity in the first IMU body frame, use when imu_en is False or start from a non-stationary state
       extrinsic_T: [ -0.011, -0.02329, 0.04412 ]
       extrinsic_R: [ 1.0, 0.0, 0.0,
                      0.0, 1.0, 0.0,
@@ -207,33 +207,52 @@ sensor_scan_generation:
 
 terrain_analysis:
   ros__parameters:
-    sensor_frame: "front_mid360"
-    scan_voxel_size: 0.05               # 点云下采样
-    decay_time: 0.5                     # 点云时间差阈值 大于则不会被处理
-    no_decay_dis: 0.0                   # 点云距离阈值 小于该阈值不考虑时间差
-    clearing_dis: 0.0                   # 该距离外的点会被清除
-    use_sorting: True                   # 这个参数开起来就能上坡了；如果 use_sorting,那么就以周围点中的分位点作为地面点，否则以最低点作为地面点；周围其余点相对于地面点的高度作为通过代价，所以对于坡面，有的点的代价是正，有的是负，就相互抵消了；不要与 consider_drop 同时开启，计算上会有冲突
-    quantile_z: 0.2                     # useful if use_sorting is enabled.
-    consider_drop: False                # 考虑凹下去的地面,开启则将相对于地面点的高度取绝对值
-    limit_ground_lift: False            # useful if use_sorting is enabled
-    max_ground_lift: 0.3                # useful if use_sorting is enabled
-    clear_dy_obs: True                  # 清除动态物体的话，有动态物体走过的地方就走不了了
-    min_dy_obs_dis: 0.3                 # 以下参数都是在 clear_dy_obs 的情况下才有用的
-    min_dy_obs_angle: 0.0
-    min_dy_obs_rel_z: -0.3
-    abs_dy_obs_rel_z_thre: 0.2
-    min_dy_obs_vfov: -28.0
-    max_dy_obs_vfov: 33.0
-    min_dy_obs_point_num: 1
-    no_data_obstacle: False             # treat no data as obstacle
-    no_data_block_skip_num: 0
-    min_block_point_num: 10
-    vehicle_height: 0.5                 # 小于车辆高度的点才会进行处理
-    voxel_point_update_thre: 100
-    voxel_time_update_thre: 1.0
-    min_rel_z: -1.5                     # min_rel_z 以及 max_rel_z 限制了有效点云点的Z值范围，用于对天花板和地板进行处理
-    max_rel_z: 0.5
-    dis_ratio_z: 0.2                    # Z 值的最大最小范围由这两个值决定，但是并不等于这两个值，是有一个比例关系的，距离机器人越远，限定范围就越大，这其中考虑了坡度
+    scanVoxelSize: 0.05                 # 点云下采样
+    decayTime: 0.5                      # 点云时间差阈值 大于则不会被处理
+    noDecayDis: 0.0                     # 点云距离阈值 小于该阈值不考虑时间差
+    clearingDis: 0.0                    # 该距离外的点会被清除
+    useSorting: True                    # 这个参数开起来就能上坡了；如果 use_sorting,那么就以周围点中的分位点作为地面点，否则以最低点作为地面点；周围其余点相对于地面点的高度作为通过代价，所以对于坡面，有的点的代价是正，有的是负，就相互抵消了；不要与 consider_drop 同时开启，计算上会有冲突
+    quantileZ: 0.2                      # useful if use_sorting is enabled.
+    considerDrop: False                 # 考虑凹下去的地面,开启则将相对于地面点的高度取绝对值
+    limitGroundLift: False
+    maxGroundLift: 0.3
+    clearDyObs: True                    # 清除动态物体的话，有动态物体走过的地方就走不了了
+    minDyObsDis: 0.3                    # 以下参数都是在 clear_dy_obs 的情况下才有用的
+    minDyObsAngle: 0.0
+    minDyObsRelZ: -0.3
+    absDyObsRelZThre: 0.2
+    minDyObsVFOV: -28.0
+    maxDyObsVFOV: 33.0
+    minDyObsPointNum: 1
+    noDataObstacle: False               # treat no data as obstacle
+    noDataBlockSkipNum: 0
+    minBlockPointNum: 10
+    vehicleHeight: 0.5                  # 小于车辆高度的点才会进行处理
+    voxelPointUpdateThre: 100
+    voxelTimeUpdateThre: 1.0
+    minRelZ: -1.5                       # min_rel_z 以及 max_rel_z 限制了有效点云点的Z值范围，用于对天花板和地板进行处理
+    maxRelZ: 0.5
+    disRatioZ: 0.2                      # Z 值的最大最小范围由这两个值决定，但是并不等于这两个值，是有一个比例关系的，距离机器人越远，限定范围就越大，这其中考虑了坡度
+
+terrain_analysis_ext:
+  ros__parameters:
+    scanVoxelSize: 0.1
+    decayTime: 0.2
+    noDecayDis: 0.0
+    clearingDis: 20.0
+    useSorting: true
+    quantileZ: 0.2
+    vehicleHeight: 1.0
+    voxelPointUpdateThre: 100
+    voxelTimeUpdateThre: 2.0
+    lowerBoundZ: -1.5
+    upperBoundZ: 0.5
+    disRatioZ: 0.2
+    checkTerrainConn: False
+    terrainUnderVehicle: -0.75
+    terrainConnThre: 0.5
+    ceilingFilteringThre: 2.0
+    localTerrainMapRadius: 4.0
 
 fake_vel_transform:
   ros__parameters:
@@ -306,11 +325,11 @@ slam_toolbox:
     throttle_scans: 1
     scan_queue_size: 10
     transform_publish_period: 0.0                # if 0 never publishes odometry
-    map_update_interval: 1.0
+    map_update_interval: 0.2
     resolution: 0.05
     min_laser_range: 0.3                         # for rastering images
     max_laser_range: 10.0                         # for rastering images
-    minimum_time_interval: 0.5
+    minimum_time_interval: 0.2
     transform_timeout: 0.2
     tf_buffer_duration: 10.
     stack_size_to_use: 40000000                   # program needs a larger stack size to serialize large maps
@@ -319,8 +338,8 @@ slam_toolbox:
     # General Parameters
     use_scan_matching: false
     use_scan_barycenter: true
-    minimum_travel_distance: 0.5
-    minimum_travel_heading: 0.3
+    minimum_travel_distance: 0.1
+    minimum_travel_heading: 0.1
     scan_buffer_size: 10
     scan_buffer_maximum_scan_distance: 10.0
     link_match_minimum_response_fine: 0.1
@@ -543,12 +562,12 @@ global_costmap:
         max_obstacle_height: 2.0
         min_obstacle_intensity: 0.1
         max_obstacle_intensity: 2.0
-        observation_sources: terrain_map
-        terrain_map:
+        observation_sources: terrain_map_ext
+        terrain_map_ext:
           data_type: PointCloud2
           # '<robot_namespace>' keyword shall be replaced with 'namespace' where user defined.
           # It doesn't need to start with '/'
-          topic: <robot_namespace>/terrain_map
+          topic: <robot_namespace>/terrain_map_ext
           min_obstacle_height: 0.0
           max_obstacle_height: 2.0
           obstacle_max_range: 10.0

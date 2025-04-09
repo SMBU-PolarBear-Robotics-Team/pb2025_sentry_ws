@@ -17,4 +17,4 @@ __pycache__
 
 symlink
 script/*.sh
-rosbag_*/
+sentry_*/
