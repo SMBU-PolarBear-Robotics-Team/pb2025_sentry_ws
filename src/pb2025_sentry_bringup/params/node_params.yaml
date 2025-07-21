@@ -11,19 +11,19 @@ standard_robot_pp_ros2:
 
 joint_state_publisher:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     rate: 200
     source_list: ["serial/gimbal_joint_state"]
     offset_timestamp: 0.0
 
 robot_state_publisher:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     publish_frequency: 200.0
 
 hik_camera_ros2_driver:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     camera_info_url: "package://pb2025_sentry_bringup/params/camera_info.yaml"
     pixel_format: "BayerRG8"        # Recommended Option: RGB8Packed, BayerRG8
     adc_bit_depth: "Bits_8"         # If using BayerRG8, adc_bit_depth must be Bits_8; otherwise, it can be Bits_8 or Bits_12
@@ -38,7 +38,7 @@ hik_camera_ros2_driver:
 
 armor_detector_opencv:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     debug: false
     camera_name: "front_industrial_camera"
 
@@ -53,7 +53,7 @@ armor_detector_opencv:
 
 armor_detector_openvino:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     use_sensor_data_qos: true
     debug_mode: false
     detect_color: 0
@@ -68,7 +68,7 @@ armor_detector_openvino:
 
 armor_tracker:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     target_frame: gimbal_pitch_odom
     max_armor_distance: 10.0
 
@@ -89,7 +89,7 @@ armor_tracker:
 
 projectile_motion:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     projectile:
       offset_pitch: 0.0
       offset_yaw: 0.0
@@ -191,7 +191,7 @@ point_lio:
 
 loam_interface:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     state_estimation_topic: "aft_mapped_to_init"
     registered_scan_topic: "cloud_registered"
     odom_frame: "odom"
@@ -200,7 +200,7 @@ loam_interface:
 
 sensor_scan_generation:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     lidar_frame: "front_mid360"
     base_frame: "base_footprint"
     robot_base_frame: "gimbal_yaw"
@@ -256,7 +256,7 @@ terrain_analysis_ext:
 
 fake_vel_transform:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     odom_topic: "odometry"
     robot_base_frame: "gimbal_yaw"
     fake_robot_base_frame: "gimbal_yaw_fake"
@@ -267,7 +267,7 @@ fake_vel_transform:
 
 small_gicp_relocalization:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     num_threads: 4
     num_neighbors: 20
     global_leaf_size: 0.1
@@ -284,7 +284,7 @@ small_gicp_relocalization:
 
 pointcloud_to_laserscan:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     target_frame: base_footprint
     min_height: -0.5
     max_height: 6.0
@@ -375,7 +375,7 @@ slam_toolbox:
 
 bt_navigator:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     global_frame: map
     robot_base_frame: gimbal_yaw_fake
     odom_topic: odometry
@@ -435,7 +435,7 @@ bt_navigator:
 
 controller_server:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     odom_topic: odometry
     controller_frequency: 20.0
     min_x_velocity_threshold: 0.001
@@ -489,7 +489,7 @@ controller_server:
 local_costmap:
   local_costmap:
     ros__parameters:
-      use_sim_time: true
+      use_sim_time: False
       update_frequency: 10.0
       publish_frequency: 5.0
       global_frame: odom
@@ -539,7 +539,7 @@ local_costmap:
 global_costmap:
   global_costmap:
     ros__parameters:
-      use_sim_time: true
+      use_sim_time: False
       update_frequency: 5.0
       publish_frequency: 2.0
       global_frame: map
@@ -593,7 +593,7 @@ map_server:
 
 map_saver:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     save_map_timeout: 5.0
     free_thresh_default: 0.25
     occupied_thresh_default: 0.65
@@ -601,44 +601,19 @@ map_saver:
 
 planner_server:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     expected_planner_frequency: 10.0
     planner_plugins: ["GridBased"]
     GridBased:
-      plugin: "nav2_smac_planner/SmacPlannerHybrid"
-      tolerance: 0.5                      # 如果无法到达精确位置的规划容差，单位：米
-      allow_unknown: true                 # 允许在未知空间中行驶
-      downsample_costmap: false           # 是否对地图进行下采样
-      downsampling_factor: 1              # 代价地图层分辨率的倍数 (e.g. 2 on a 5cm costmap would be 10cm)
-      max_iterations: 1000000             # 搜索的最大总迭代次数（如果无法到达），设置为-1以禁用
-      max_on_approach_iterations: 1000    # 一旦在容差范围内，尝试到达目标的最大迭代次数
-      max_planning_time: 3.5              # 规划、平滑和上采样的最大时间（秒）。将根据规划后的剩余时间缩放最大平滑和上采样时间。
-      cost_travel_multiplier: 2.0         # For 2D: 应用于搜索的代价乘数，以避开高代价区域。较大的值将更精确地放置在通道的中心（如果存在非“FREE”代价势场），但计算时间稍长。为了优化速度，1.0是合理的值。合理的折衷值是2.0。0.0的值有效地禁用避开障碍物的功能，像一个简单的二进制搜索A*。
-      motion_model_for_search: "DUBIN"    # For Hybrid Dubin, Redds-Shepp
-      angle_quantization_bins: 64         # For Hybrid nodes: 搜索的角度桶数，对于2D节点必须为1（无角度搜索）
-      analytic_expansion_ratio: 3.5       # For Hybrid/Lattice nodes: 在搜索过程中尝试解析扩展的比例，用于最终接近。
-      analytic_expansion_max_length: 3.0  # For Hybrid/Lattice nodes: 解析扩展被认为有效的最大长度，以防止不安全的捷径（单位：米）。这应该与最小转弯半径成比例，不应小于最小半径的4-5倍。
-      minimum_turning_radius: 0.05        # For Hybrid/Lattice nodes: 路径/车辆的最小转弯半径，单位：米
-      retrospective_penalty: 0.025        # For Hybrid/Lattice nodes: 优先考虑路径上较晚的机动而不是较早的机动。节省搜索时间，因为较早的节点不会被扩展，直到有必要。必须 >= 0.0且 <= 1.0
-      reverse_penalty: 1.0                # For Reeds-Shepp model: 应用于倒车的惩罚，必须 >= 1
-      change_penalty: 0.0                 # For Hybrid nodes: 应用于改变方向的惩罚，必须 >= 0
-      non_straight_penalty: 1.20          # For Hybrid nodes: 应用于非直线运动的惩罚，必须 >= 1
-      cost_penalty: 2.0                   # For Hybrid nodes: 在将更高代价区域添加到障碍物地图动态规划距离扩展启发式时应用的惩罚。这将驱动机器人更靠近通道的中心。1.3 - 3.5 之间的值是合理的。
-      rotation_penalty: 5.0               # For Lattice node: 仅在使用包含原地旋转原语的最小控制集时应用于纯原地旋转命令的惩罚。除非严格必要用于避开障碍物，否则应始终设置足够高的权重，以避免此操作，否则可能会在路径中频繁出现不连续的情况，要求机器人原地旋转以节省路径距离。
-      lookup_table_size: 20.0             # For Hybrid nodes: 缓存的dubin/reeds-sheep距离窗口的大小，单位：米。
-      cache_obstacle_heuristic: True      # For Hybrid nodes: 在同一目标位置的后续重新规划之间缓存障碍物地图动态规划距离扩展启发式。如果代价地图基本静态，则显著加快重新规划性能（40倍）。
-      allow_reverse_expansion: False      # For Lattice node: 是否在前向原语或反向扩展状态格子图中扩展，将使每一步的分支因子加倍。
-      smooth_path: True                   # For Lattice/Hybrid nodes: 是否平滑路径，对于2D节点始终为 true。
-      smoother:
-        max_iterations: 1000
-        w_smooth: 0.3
-        w_data: 0.2
-        tolerance: 1.0e-10
-        do_refinement: true
+      plugin: "nav2_theta_star_planner/ThetaStarPlanner" # In Iron and older versions, "/" was used instead of "::"
+      how_many_corners: 8
+      w_euc_cost: 1.0
+      w_traversal_cost: 10.0
+      w_heuristic_cost: 1.0
 
 smoother_server:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     smoother_plugins: ["simple_smoother"]
     simple_smoother:
       plugin: "nav2_smoother::SimpleSmoother"
@@ -648,7 +623,7 @@ smoother_server:
 
 behavior_server:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     local_costmap_topic: local_costmap/costmap_raw
     global_costmap_topic: global_costmap/costmap_raw
     local_footprint_topic: local_costmap/published_footprint
@@ -680,7 +655,7 @@ behavior_server:
 
 waypoint_follower:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     loop_rate: 20
     stop_on_failure: false
     waypoint_task_executor_plugin: "wait_at_waypoint"
@@ -691,7 +666,7 @@ waypoint_follower:
 
 velocity_smoother:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     smoothing_frequency: 20.0
     scale_velocities: False
     feedback: "OPEN_LOOP"
@@ -706,7 +681,7 @@ velocity_smoother:
 
 pb2025_sentry_behavior_server:
   ros__parameters:
-    use_sim_time: true
+    use_sim_time: False
     action_name: pb2025_sentry_behavior         # Optional
     tick_frequency: 5                           # Optional (defaults to 100 Hz)
     groot2_port: 1667                           # Optional (defaults to 1667)
@@ -728,12 +703,12 @@ pb2025_sentry_behavior_server:
 
 pb2025_sentry_behavior_client:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     target_tree: rmul_2025
 
 pb_teleop_twist_joy_node:
   ros__parameters:
-    use_sim_time: false
+    use_sim_time: False
     robot_base_frame: gimbal_yaw
     control_mode: auto_control    # Option: auto_control, manual_control
 
